@@ -59,17 +59,19 @@ const STUDIO_CONFIG = {
 // ═══════════════════════════════════════════════════════════════
 //  STUDIO_IMAGES — All image URLs from Ashland Hot Yoga CDN
 // ═══════════════════════════════════════════════════════════════
+// NOTE: Each hero uses a DIFFERENT image or CSS gradient fallback (h:28 warm amber)
+// Gradient fallback: linear-gradient(135deg, hsl(28,75%,50%) 0%, hsl(28,75%,30%) 100%)
 const STUDIO_IMAGES = {
   logo: "https://ashlandhotyoga.com/wp-content/uploads/2024/04/original-200x72.png",
   heroYouBelongHere: "https://ashlandhotyoga.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-28-at-02.00.20_f99e387f-1024x1024.jpg",
   welcomeEntrance: "https://ashlandhotyoga.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-28-at-02.00.20_f99e387f-1024x1024.jpg",
-  classesHero: "https://ashlandhotyoga.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-28-at-02.00.20_f99e387f-1024x1024.jpg",
-  powerBeats: "https://ashlandhotyoga.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-28-at-02.00.20_f99e387f-1024x1024.jpg",
-  events: "https://ashlandhotyoga.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-28-at-02.00.20_f99e387f-1024x1024.jpg",
-  about: "https://ashlandhotyoga.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-28-at-02.00.20_f99e387f-1024x1024.jpg",
-  pricing: "https://ashlandhotyoga.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-28-at-02.00.20_f99e387f-1024x1024.jpg",
-  teacherTraining: "https://ashlandhotyoga.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-28-at-02.00.20_f99e387f-1024x1024.jpg",
-  candlelitPower: "https://ashlandhotyoga.com/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-28-at-02.00.20_f99e387f-1024x1024.jpg",
+  classesHero: "https://ashlandhotyoga.com/wp-content/uploads/2024/05/WhatsApp-Image-2024-05-26-at-00.24.43_be408dd7.jpg",
+  powerBeats: "https://ashlandhotyoga.com/wp-content/uploads/2024/05/WhatsApp-Image-2024-05-25-at-00.51.22_85fb30d2-1024x1024.jpg",
+  events: "https://ashlandhotyoga.com/wp-content/uploads/2024/05/6F8D9651-AEC8-440A-A761-BA1DEC8A3FC0-1024x1024.jpeg",
+  about: "https://ashlandhotyoga.com/wp-content/uploads/2024/05/11286FC2-7891-47E0-AA59-F2B62846B941.jpeg",
+  pricing: "https://ashlandhotyoga.com/wp-content/uploads/2024/05/045B5171-81EB-49A1-B7B0-7E1E214E5BB9-1024x1024.jpeg",
+  teacherTraining: "https://ashlandhotyoga.com/wp-content/uploads/2024/05/035E0312-8FA9-4810-9069-AFDB3978FEB7-1024x1024.jpeg",
+  candlelitPower: "https://ashlandhotyoga.com/wp-content/uploads/2025/07/80AC1253-BD4A-4A93-AA57-1E750377454E.jpeg",
   teachers: {
     christine: "https://ashlandhotyoga.com/wp-content/uploads/2025/07/80AC1253-BD4A-4A93-AA57-1E750377454E.jpeg",
     crystal: "https://ashlandhotyoga.com/wp-content/uploads/2024/05/WhatsApp-Image-2024-05-26-at-00.24.43_be408dd7.jpg",
@@ -1123,9 +1125,9 @@ function PageTitle({ title, subtitle }) {
 
 function PageHero({ title, subtitle, image }) {
   return (
-    <div style={{ position: "relative", overflow: "hidden", padding: "28px 20px 20px", minHeight: 120, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+    <div style={{ position: "relative", overflow: "hidden", padding: "28px 20px 16px", minHeight: 220, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${image})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.7)" }} />
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.45) 100%)" }} />
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.45) 100%)" }} />
       <div style={{ position: "relative", zIndex: 2 }}>
         <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 34, margin: 0, color: "#fff" }}>{title}</h1>
         {subtitle && <p style={{ fontSize: 13, color: "rgba(255,255,255,.75)", margin: "4px 0 0" }}>{subtitle}</p>}
@@ -1647,7 +1649,7 @@ export default function App() {
         )}
 
         {/* Bottom Nav */}
-        <nav style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 30, background: T.bgCard, borderTop: `1px solid ${T.border}`, maxWidth: 390, margin: "0 auto" }}>
+        <nav style={{ position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)", zIndex: 30, background: T.bgCard, borderTop: `1px solid ${T.border}`, maxWidth: 390, width: "100%", maxWidth: "390px" }}>
           <div style={{ display: "flex", justifyContent: "space-around", padding: "6px 4px 10px" }}>
             {mainTabs.map(tab => {
               const active = tab.id === "more" ? (isMoreActive || showMore) : page === tab.id;
