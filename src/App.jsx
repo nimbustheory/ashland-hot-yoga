@@ -81,7 +81,6 @@ const STUDIO_IMAGES = {
     nicole: "https://ashlandhotyoga.com/wp-content/uploads/2024/05/39D21D54-41C3-45DA-8568-00743962CBC4-1024x1024.jpeg",
   },
 };
-};
 
 
 // ═══════════════════════════════════════════════════════════════
