@@ -1,11 +1,11 @@
-import { Calendar, Flame, Heart, Users, CreditCard, Star, Bell, Shield, Sparkles, MapPin } from "lucide-react";
+import { Calendar, Flame, Heart, Users, CreditCard, Star, Bell, Shield, Sparkles, MapPin, ChevronRight, Layers } from "lucide-react";
 import config from "./demo.config.js";
 import App from "./App.jsx";
 
 const iconMap = {
   calendar: Calendar, flame: Flame, heart: Heart, users: Users,
   "credit-card": CreditCard, star: Star, bell: Bell, shield: Shield,
-  sparkles: Sparkles, "map-pin": MapPin,
+  sparkles: Sparkles, "map-pin": MapPin, layers: Layers,
 };
 
 export default function DemoWrapper() {
@@ -15,144 +15,140 @@ export default function DemoWrapper() {
     window.dispatchEvent(new Event("lumi-open-admin"));
   };
 
-  const nonAdminCards = config.salesCards.filter(c => c.icon !== "shield");
-
   return (
-    <div style={{ display: "flex", justifyContent: "center", minHeight: "100vh", background: "#f5f4f1", fontFamily: "'DM Sans', system-ui, sans-serif" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: "#f5f4f1", fontFamily: "'DM Sans', system-ui, sans-serif", color: "#1a1a1a" }}>
+
       {/* LEFT SIDEBAR */}
       <aside className="demo-sidebar demo-sidebar-left" style={{
-        width: 320, flexShrink: 0, position: "sticky", top: 0, height: "100vh",
+        width: 320, flexShrink: 0, background: "#fdfbf6",
+        borderRight: "1px solid #e8e6e1",
+        position: "sticky", top: 0, height: "100vh",
         display: "flex", flexDirection: "column", overflow: "hidden",
-        borderRight: "1px solid #e8e6e1", background: "#f5f4f1",
       }}>
-        <div className="demo-sidebar-scroll" style={{ flex: 1, overflowY: "auto", padding: "40px 32px 0" }}>
-          <p style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.18em", color: ac, margin: "0 0 28px" }}>
-            Prototype Demo
-          </p>
+        <div className="demo-sidebar-scroll" style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column" }}>
+          {/* Prototype Label */}
+          <div style={{ padding: "20px 24px 0" }}>
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: ac, background: `${ac}14`, padding: "5px 10px", borderRadius: 4 }}>
+              Prototype Demo
+            </span>
+          </div>
 
           {/* Studio Identity */}
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
-            {config.logoUrl ? (
-              <img src={config.logoUrl} alt={config.studioName} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 40, borderRadius: 8 }} onError={e => e.target.style.display='none'} />
-            ) : (
-              <div style={{ width: 40, height: 40, borderRadius: 10, background: ac, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: "#fff" }}>{config.logoMark}</div>
-            )}
-            <div>
-              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 700, color: "#1a1e2e", lineHeight: 1.1 }}>{config.studioShortName}</div>
-              <div style={{ fontSize: 12, color: "#7a7a7a" }}>{config.studioSubtitle}</div>
+          <div style={{ padding: "20px 24px 20px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ width: 44, height: 44, borderRadius: 12, background: ac, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700, color: "#fff", flexShrink: 0 }}>
+                {config.logoMark}
+              </div>
+              <div>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 700, letterSpacing: "0.02em", color: "#1a1e2e", lineHeight: 1.1 }}>{config.studioShortName}</div>
+                <div style={{ fontSize: 12, color: "#7a7a7a", marginTop: 2 }}>{config.studioSubtitle}</div>
+              </div>
             </div>
           </div>
 
           {/* Feature List */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 20, paddingBottom: 24 }}>
-            {config.features.map((f, i) => {
-              const Icon = iconMap[f.icon] || Star;
-              return (
-                <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
-                  <Icon size={18} color={ac} style={{ marginTop: 2, flexShrink: 0 }} />
-                  <div>
-                    <div style={{ fontSize: 14, fontWeight: 700, color: "#1a1e2e" }}>{f.title}</div>
-                    <div style={{ fontSize: 13, color: "#7a7a7a", lineHeight: 1.4 }}>{f.desc}</div>
+          <div style={{ padding: "0 24px 20px", flex: 1 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#a8a298", marginBottom: 12 }}>App Features</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {config.features.map((f, i) => {
+                const Icon = iconMap[f.icon] || Star;
+                return (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: 14, borderRadius: 10, background: "#f5f4f1" }}>
+                    <div style={{ width: 32, height: 32, borderRadius: 8, background: `${ac}15`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                      <Icon size={16} color={ac} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: "#1a1e2e" }}>{f.title}</div>
+                      <div style={{ fontSize: 12, color: "#7a7a7a", marginTop: 2, lineHeight: 1.4 }}>{f.desc}</div>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
-
-        {/* Pinned Footer */}
-        <div style={{
-          position: "sticky", bottom: 0, padding: "16px 32px",
-          background: "#f5f4f1", borderTop: "1px solid #eee", zIndex: 10,
-        }}>
-          <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.12em", color: "#b0ada6", margin: 0 }}>
-            Built by LUMI — LumiClass.app
-          </p>
         </div>
       </aside>
 
-      {/* CENTER: PHONE FRAME */}
-      <div style={{
-        width: 390, flexShrink: 0, position: "relative",
-        boxShadow: "0 8px 40px rgba(0,0,0,.12), 0 2px 12px rgba(0,0,0,.06)",
-        borderRadius: 0, overflow: "hidden", height: 720,
-        marginTop: 40, alignSelf: "flex-start",
-        transform: "translateZ(0)",
-      }}>
-        <div className="phone-scroll" style={{ height: "100%", overflow: "auto" }}>
-          <App />
+      {/* CENTER: PHONE FRAME WITH BEZEL */}
+      <main style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "flex-start", paddingTop: 32, paddingBottom: 32 }}>
+        <div style={{ position: "relative" }}>
+          <div style={{
+            width: 414, background: "#1a1a24", borderRadius: 44, padding: 12,
+            boxShadow: `0 0 0 1px #2a2a34, 0 20px 60px rgba(0,0,0,.3), 0 0 120px ${ac}14`,
+          }}>
+            {/* Notch */}
+            <div style={{ width: 120, height: 6, background: "#2a2a34", borderRadius: 3, margin: "0 auto 8px" }} />
+            {/* Screen */}
+            <div className="phone-scroll" style={{
+              width: 390, height: 720, borderRadius: 28, overflow: "auto", background: "#fff",
+              position: "relative",
+            }}>
+              <App />
+            </div>
+            {/* Home indicator */}
+            <div style={{ width: 134, height: 5, background: "#3a3a44", borderRadius: 3, margin: "8px auto 4px" }} />
+          </div>
         </div>
-      </div>
+      </main>
 
       {/* RIGHT SIDEBAR */}
       <aside className="demo-sidebar demo-sidebar-right" style={{
-        width: 340, flexShrink: 0, position: "sticky", top: 0, height: "100vh",
+        width: 340, flexShrink: 0, background: "#fdfbf6",
+        borderLeft: "1px solid #e8e6e1",
+        position: "sticky", top: 0, height: "100vh",
         display: "flex", flexDirection: "column", overflow: "hidden",
-        borderLeft: "1px solid #e8e6e1", background: "#f5f4f1",
       }}>
-        <div className="demo-sidebar-scroll" style={{ flex: 1, overflowY: "auto", padding: "40px 32px 0", display: "flex", flexDirection: "column", gap: 20 }}>
-          {/* Admin card — always present, with Shield icon + Open Admin button */}
-          <div style={{
-            background: "#fff", borderRadius: 14, padding: "24px 22px",
-            border: "1px solid #e8e6e1",
-          }}>
-            <Shield size={28} color={ac} style={{ marginBottom: 12 }} />
-            <h3 style={{ fontSize: 18, fontWeight: 700, color: "#1a1e2e", margin: "0 0 8px", fontFamily: "'Playfair Display', serif" }}>Admin Dashboard</h3>
-            <p style={{ fontSize: 14, color: "#5a5a5a", lineHeight: 1.55, margin: "0 0 14px" }}>
-              Full analytics, member CRM, scheduling, and broadcast tools — all in one place.
-            </p>
-            <button onClick={openAdmin} style={{
-              display: "inline-flex", alignItems: "center", gap: 6, padding: "9px 18px", borderRadius: 8,
-              background: ac, color: "#fff", fontWeight: 700, fontSize: 13,
-              border: "none", cursor: "pointer", fontFamily: "'Playfair Display', serif",
-              letterSpacing: "0.03em",
-            }}>
-              Open Admin
-            </button>
-          </div>
-
-          {nonAdminCards.map((card, i) => {
+        <div className="demo-sidebar-scroll" style={{ flex: 1, overflowY: "auto", padding: "24px 20px", display: "flex", flexDirection: "column", gap: 14 }}>
+          {config.salesCards.map((card, i) => {
             const Icon = iconMap[card.icon] || Star;
+            const isAdminCard = card.icon === "shield";
             return (
-              <div key={i} style={{
-                background: "#fff", borderRadius: 14, padding: "24px 22px",
-                border: "1px solid #e8e6e1",
-              }}>
-                <Icon size={28} color={ac} style={{ marginBottom: 12 }} />
-                <h3 style={{ fontSize: 18, fontWeight: 700, color: "#1a1e2e", margin: "0 0 8px", fontFamily: "'Playfair Display', serif" }}>{card.title}</h3>
-                <p style={{ fontSize: 14, color: "#5a5a5a", lineHeight: 1.55, margin: 0 }}>{card.desc}</p>
+              <div key={i} style={{ background: "#fff", border: "1px solid #e8e6e1", borderRadius: 14, padding: "18px 16px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                  <div style={{ width: 36, height: 36, borderRadius: 10, background: `${ac}15`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <Icon size={18} color={ac} />
+                  </div>
+                  <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 600, color: "#1a1e2e", margin: 0 }}>{card.title}</h3>
+                </div>
+                <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.55, margin: 0 }}>{card.desc}</p>
+                {isAdminCard && (
+                  <button onClick={openAdmin} style={{
+                    display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
+                    width: "100%", padding: "10px 0", marginTop: 14, borderRadius: 8,
+                    border: "none", background: ac, color: "#fff", fontWeight: 700, fontSize: 14,
+                    cursor: "pointer", fontFamily: "'DM Sans', sans-serif",
+                  }}>
+                    <Shield size={16} /> Open Admin
+                  </button>
+                )}
               </div>
             );
           })}
 
           {/* CTA Card */}
-          <div style={{
-            background: "#1a1e2e", borderRadius: 14, padding: "24px 22px", color: "#fff",
-            marginBottom: 24,
-          }}>
-            <h3 style={{ fontSize: 18, fontWeight: 700, margin: "0 0 8px", fontFamily: "'Playfair Display', serif" }}>Ready to Launch?</h3>
-            <p style={{ fontSize: 14, color: "rgba(255,255,255,.65)", lineHeight: 1.55, margin: "0 0 16px" }}>
+          <div style={{ background: `linear-gradient(135deg, ${ac}15, ${ac}08)`, border: `1px solid ${ac}30`, borderRadius: 14, padding: "22px 18px", textAlign: "center" }}>
+            <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 600, color: "#1a1e2e", margin: "0 0 6px" }}>Ready to Launch?</h3>
+            <p style={{ fontSize: 13, color: "#6b7280", margin: "0 0 16px", lineHeight: 1.45 }}>
               Get a custom-branded loyalty app built for your studio — designed, populated, and ready to deploy.
             </p>
             <a href="https://lumiclass.app" target="_blank" rel="noopener noreferrer" style={{
-              display: "inline-block", padding: "10px 24px", borderRadius: 8,
-              background: ac, color: "#fff", fontWeight: 700, fontSize: 14,
-              textDecoration: "none", fontFamily: "'Playfair Display', serif",
-              letterSpacing: "0.03em",
+              display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 28px",
+              borderRadius: 10, background: ac, color: "#fff", fontWeight: 700, fontSize: 14,
+              textDecoration: "none", letterSpacing: "0.02em",
             }}>
-              Learn More
+              Learn More <ChevronRight size={16} />
             </a>
           </div>
         </div>
 
         {/* Pinned Footer */}
         <div style={{
-          position: "sticky", bottom: 0, padding: "16px 32px",
-          background: "#f5f4f1", borderTop: "1px solid #eee", zIndex: 10,
+          position: "sticky", bottom: 0, padding: "16px 24px",
+          background: "#fdfbf6", borderTop: "1px solid #eee", zIndex: 10,
         }}>
-          <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.12em", color: "#b0ada6", margin: 0 }}>
-            Built by LUMI — LumiClass.app
-          </p>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#b0ada6", textAlign: "center" }}>
+            Built by <span style={{ color: ac }}>LUMI</span> — LumiClass.app
+          </div>
         </div>
       </aside>
 

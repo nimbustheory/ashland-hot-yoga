@@ -1134,7 +1134,7 @@ function PageHero({ title, subtitle, image }) {
           {subtitle && <p style={{ fontSize: 13, color: "rgba(255,255,255,.75)", margin: "4px 0 0" }}>{subtitle}</p>}
         </div>
       </div>
-      <div style={{ paddingTop: 4 }} />
+      <div style={{ paddingTop: 20 }} />
     </>
   );
 }
@@ -1657,7 +1657,7 @@ export default function App() {
         )}
 
         {/* Bottom Nav */}
-        <nav style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 60, zIndex: 30, background: T.bgCard, borderTop: `1px solid ${T.border}` }}>
+        <nav style={{ position: "sticky", bottom: 0, left: 0, right: 0, height: 60, zIndex: 30, background: T.bgCard, borderTop: `1px solid ${T.border}` }}>
           <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center", height: "100%", padding: "0 4px" }}>
             {mainTabs.map(tab => {
               const active = tab.id === "more" ? (isMoreActive || showMore) : page === tab.id;
